@@ -2,8 +2,8 @@
 //  SlateWebridge.h
 //  Slate
 //
-//  Created by yize lin on 13-8-5.
-//  Copyright (c) 2012年 Modern Mobile Digital Media Company Limited. All rights reserved.
+//  Created by yize lin on 16-6-23.
+//  Copyright (c) 2016年 islate. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
