@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "UIWebView+webridge.h"
+
 typedef void (^SlateWebridgeCompletionBlock)(id result, NSError *error);
 
 @protocol SlateWebridgeHandler;
@@ -34,4 +36,9 @@ typedef void (^SlateWebridgeCompletionBlock)(id result, NSError *error);
 
 @protocol SlateWebridgeHandler <NSObject>
 
+@end
+
+@protocol SlateWebridgeWebViewDelegate <UIWebViewDelegate>
+@optional
+- (void)domReady:(id)params webView:(UIWebView *)webView;
 @end

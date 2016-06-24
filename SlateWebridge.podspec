@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/islate/SlateWebridge.git", :tag => s.version.to_s }
 
   s.source_files = 'SlateWebridge/*.{h,m}'
+  s.resource = 'SlateWebridge/webridge.js'
   s.dependency 'SlateUtils'
 
 end

@@ -13,6 +13,8 @@
 #import "NSString+urlencode.h"
 #import "NSObject+webridge.h"
 
+#define WEBVIEW_DELEGATE_COMMAND @"domReady"
+
 @interface SlateScriptMessage : NSObject
 
 @property (nonatomic, strong) id body;
@@ -232,6 +234,11 @@
 
 - (BOOL)asyncExecuteForCommand:(NSString *)command params:(id)params sequence:(NSNumber *)sequence webView:(UIWebView *)webView
 {
+    if ([command isEqualToString:WEBVIEW_DELEGATE_COMMAND])
+    {
+        return NO;
+    }
+    
     NSInvocation *invocation = nil;
     
     NSString *methodName = [NSString stringWithFormat:@"%@:completion:webView:", command];
@@ -299,7 +306,16 @@
     NSString *methodName = [NSString stringWithFormat:@"%@:webView:", command];
     SEL selector = NSSelectorFromString(methodName);
     
-    id target = [self targetWithSelector:selector];
+    id target = nil;
+    if ([command isEqualToString:WEBVIEW_DELEGATE_COMMAND])
+    {
+        target = webView.delegate;
+    }
+    else
+    {
+        target = [self targetWithSelector:selector];
+    }
+    
     if (!target)
     {
         NSString *error = @"Webridge target is nil.";
