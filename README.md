@@ -1,12 +1,11 @@
 SlateWebridge
 ========
 
-# 1、介绍
+原生代码与网页JS之间互相调用的一种机制，支持同步/异步调用。
 
-    SlateWebridge
-        原生代码与网页JS之间互相调用的一种机制，支持同步/异步调用。
+# 1 定义
 
-## 原生代码调用网页内的js函数，并获得返回值。
+## 1.1 原生代码调用网页内的js函数，并获得返回值。
 
 	可调用的js函数格式约定:
 		同步返回
@@ -21,7 +20,7 @@ SlateWebridge
 			参数2类型: {function}    function (result)  result 返回值 {object}类型
 			返回值:   void
 
-## 网页内的js函数调用原生代码，传递方法名、参数、回调函数。通过回调函数获得返回值。
+## 1.2 网页内的js函数调用原生代码，传递方法名、参数、回调函数。通过回调函数获得返回值。
 
 	可调用的原生方法约定：
 		同步返回
@@ -41,13 +40,13 @@ SlateWebridge
 		参数2类型：{string}  error   错误信息字符串象
 		返回值：  void
 
-# 适合场景
+# 2 适合场景
 
-	混合式App(Native + Web)开发
+混合式App(Native + Web)开发
 
-# Usage
+# 3 Usage
 
-## 实现WebridgeHandler
+## 3.1 实现WebridgeHandler
 
 	@implementation WebridgeHandler
 
@@ -58,14 +57,14 @@ SlateWebridge
     
 	@end
 
-## 注册WebridgeHandler
+## 3.2 注册WebridgeHandler
 
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    // 注册WebridgeHandler
+        // 注册WebridgeHandler
 	[[SlateWebridge sharedBridge] setPriorHandler:[WebridgeHandler new]];
 
-## js调用原生代码，并异步得到返回值
+## 3.3 js调用原生代码，并异步得到返回值
 
 	webridge.jsToNative('nativeCommand', {'param':'value'}, function (result, error) {
 		if (error.length > 0) {
@@ -76,7 +75,7 @@ SlateWebridge
 		}
 	});
 
-## 原生代码调用js，并异步得到返回值
+## 3.4 原生代码调用js，并异步得到返回值
 
 	[self.webView evalJSCommand:@"jsObject.jsCommand" jsParams:@{@"param": @"value"} 
 			completionHandler:^(id result, NSError *error) {
@@ -99,7 +98,7 @@ SlateWebridge
 		return result;
 	};
 
-# install
+# 4 引入
 
 	pod 'SlateWebridge'
 
