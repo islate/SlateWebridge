@@ -257,8 +257,10 @@
     }
     
     __weak typeof(self) weakSelf = self;
+    __weak UIWebView *weakWebView = webView;
     SlateWebridgeCompletionBlock block = ^(id result, NSError *error) {
-        [weakSelf callbackWithResult:result error:error.localizedDescription sequence:sequence webView:webView];
+        __strong UIWebView *strongWebView = weakWebView;
+        [weakSelf callbackWithResult:result error:error.localizedDescription sequence:sequence webView:strongWebView];
     };
     
     invocation = [NSInvocation invocationWithMethodSignature:signature];
